@@ -1,7 +1,5 @@
 import { unsafeWindow } from '$'
 // 一些常用 DOM 方法的简写
-const dq = document.querySelector.bind(document)
-const dqa = document.querySelectorAll.bind(document)
 const dce = document.createElement.bind(document)
 
 /**
@@ -67,4 +65,4 @@ const isSelfTopFrame = (): boolean => window.self === window.top
  */
 const topFrameDocumentElement = (): HTMLElement | undefined => window.top?.document.documentElement
 
-export { dq, dqa, dce, waitForElement, isTargetFrame, isSelfTopFrame, topFrameDocumentElement }
+export { dce, waitForElement, isTargetFrame, isSelfTopFrame, topFrameDocumentElement }

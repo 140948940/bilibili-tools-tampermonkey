@@ -86,7 +86,7 @@ class BaseModule {
   constructor(moduleName: string) {
     this.moduleName = `${moduleName} ${this.id}`
     this.logger = new Logger(this.moduleName)
-    this.logger.log('实例化了一个模板：' + this.moduleName)
+    this.logger.log('实例化了一个模块：' + this.moduleName)
   }
 }
 

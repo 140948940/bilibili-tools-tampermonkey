@@ -1,15 +1,18 @@
 {
   "name": "bilibili-tools-tampermonkey",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "B站工具集油猴插件",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build-mini": "run-s type-check \"build-only {@}\" minify --",
     "preview": "vite preview",
+    "build-only": "vite build",
+    "build": "vite build",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "minify": "node scripts/minifyUserscript.js"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
@@ -40,6 +43,7 @@
     "eslint-plugin-vue": "^10.1.0",
     "npm-run-all2": "^7.0.2",
     "prettier": "^3.5.3",
+    "terser": "^5.40.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vite-plugin-monkey": "^5.0.8",

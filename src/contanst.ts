@@ -21,4 +21,4 @@ export const upOptions = [
   },
 ] as const
 
-export const upUids = upOptions.map((item) => item.value)
+export const upUids:number[] = upOptions.map((item) => item.value)

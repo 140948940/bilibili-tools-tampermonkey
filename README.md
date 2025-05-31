@@ -11,6 +11,7 @@ fork至https://github.com/andywang425/BLTH，感谢大佬开源代码，去掉�
 - 📦 模块化设计，代码结构清晰
 ## 安装
  [安装](https://raw.githubusercontent.com/140948940/bilibili-tools-tampermonkey/master/dist/bilibili-tools-tampermonkey.user.js)
+ 可能有些油猴版本因为权限问题会报错，可以新建脚本-》把这个dist/bilibili-tools-tampermonkey.user.js内容粘贴进去保存
 ## 当前支持的功能
 
 - 评论申诉：快速提交评论申诉，支持批量操作
