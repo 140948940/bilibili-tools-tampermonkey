@@ -33,7 +33,7 @@
 // @run-at       document-start
 // ==/UserScript==
 
-(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const a=document.createElement("style");a.textContent=e,document.head.append(a)})(" .el-tag[data-v-7bf142ea]{margin-right:8px;cursor:pointer}.avatar-wrap[data-v-1d0a6c1a]{width:80px;height:80px}.avatar[data-v-1d0a6c1a]{display:flex;justify-content:center;align-items:center;border-radius:50%}.radio-group[data-v-1d0a6c1a]{display:block;font-size:inherit}.info-icon[data-v-38289ed3]{font-size:var(--el-font-size-base);cursor:pointer}.status-icon[data-v-b4254e0f]{font-size:var(--el-font-size-base)}#asldd-bilibili-tools-app{--el-color-primary: #f69;--el-color-primary-light-3: #fc8bab;--el-color-primary-dark-2: #f69}.bilibili-tools-container[data-v-67b086be]{position:fixed;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.panel-toggle[data-v-67b086be]{position:fixed;top:80px;left:20px;z-index:10000;transition:all .3s ease;border-radius:8px;padding:8px 16px;box-shadow:0 2px 12px #0000001a}.panel-toggle[data-v-67b086be]:hover{transform:translateY(-2px);box-shadow:0 4px 16px #00000026}.panel-container[data-v-67b086be]{position:fixed;top:80px;left:10%;width:800px;background:var(--el-bg-color);border-radius:8px;box-shadow:0 4px 16px #0000001a;overflow:hidden;border:1px solid var(--el-border-color-lighter);height:80vh}.tools-container[data-v-67b086be]{height:0}.panel-header[data-v-67b086be]{height:50px;line-height:50px;padding:0 20px;border-bottom:1px solid var(--el-border-color-lighter);background:var(--el-bg-color)}.header-content[data-v-67b086be]{display:flex;justify-content:space-between;align-items:center}.header-title[data-v-67b086be]{font-size:16px;font-weight:700;color:var(--el-text-color-primary)}.opacity-control[data-v-67b086be]{flex:1}.header-actions[data-v-67b086be]{width:300px;display:flex;align-items:center}.panel-aside[data-v-67b086be]{border-right:1px solid var(--el-border-color-lighter);background:var(--el-bg-color-page)}.tools-menu[data-v-67b086be]{border-right:none;font-size:12px}.tools-menu .el-menu-item[data-v-67b086be]{height:40px;line-height:40px;padding:0 20px;margin:4px 8px;border-radius:4px;transition:all .3s ease}.tools-menu .el-menu-item[data-v-67b086be]:hover{background-color:var(--el-color-primary-light-9)}.tools-menu .el-menu-item.is-active[data-v-67b086be]{background-color:var(--el-color-primary);color:#fff}.panel-main[data-v-67b086be]{background:var(--el-bg-color);padding:20px}.plugin-settings[data-v-67b086be]{background-color:var(--el-bg-color-page);border-radius:4px;padding:15px;overflow-y:auto;height:100%}.theme-toggle-inner[data-v-67b086be]{font-size:18px;padding:8px;height:32px;width:32px}.panel-container[data-v-67b086be]{background:var(--el-bg-color);border-color:var(--el-border-color);display:flex;flex-direction:column}.el-menu[data-v-67b086be]{background-color:var(--bg-color);border-color:var(--border-color)}.el-menu-item[data-v-67b086be]{color:var(--text-color)}.tools-container[data-v-67b086be] .el-tab-pane{height:100%;overflow-y:auto}.tools-container[data-v-67b086be] .el-tag{white-space:normal;line-height:1.4;margin-bottom:5px}.blth_btn{background-color:#23ade5;font-size:small;margin-inline-start:5px;color:#fff;border-radius:4px;border:none;padding:5px;cursor:pointer;box-shadow:0 0 2px #00000075;line-height:10px;margin-left:15px}.blth_btn:hover{background-color:#1097cc}.blth_btn:hover:active{background-color:#0e86b6;position:relative;top:1px}.el-message,.el-overlay,.el-message-box{z-index:99002!important}.el-message-box li{list-style:initial}@media screen and (min-width: 1930px){html[lab-style*=adaptive] .base{zoom:.9375}}@media screen and (min-width: 2058px){html[lab-style*=adaptive] .base{zoom:.75}}@media screen and (min-width: 2570px){html[lab-style*=adaptive] .base{zoom:calc(2 / 3)}}@media screen and (min-width: 3210px){html[lab-style*=adaptive] .base{zoom:.5}}@media screen and (min-width: 3850px){html[lab-style*=adaptive] .base{zoom:.46875}} ");
+(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const a=document.createElement("style");a.textContent=e,document.head.append(a)})(" .el-tag[data-v-6d4a69e9]{margin-right:8px;cursor:pointer}.avatar-wrap[data-v-1d0a6c1a]{width:80px;height:80px}.avatar[data-v-1d0a6c1a]{display:flex;justify-content:center;align-items:center;border-radius:50%}.radio-group[data-v-1d0a6c1a]{display:block;font-size:inherit}.info-icon[data-v-38289ed3]{font-size:var(--el-font-size-base);cursor:pointer}.status-icon[data-v-b4254e0f]{font-size:var(--el-font-size-base)}#asldd-bilibili-tools-app{--el-color-primary: #f69;--el-color-primary-light-3: #fc8bab;--el-color-primary-dark-2: #f69}.bilibili-tools-container[data-v-67b086be]{position:fixed;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.panel-toggle[data-v-67b086be]{position:fixed;top:80px;left:20px;z-index:10000;transition:all .3s ease;border-radius:8px;padding:8px 16px;box-shadow:0 2px 12px #0000001a}.panel-toggle[data-v-67b086be]:hover{transform:translateY(-2px);box-shadow:0 4px 16px #00000026}.panel-container[data-v-67b086be]{position:fixed;top:80px;left:10%;width:800px;background:var(--el-bg-color);border-radius:8px;box-shadow:0 4px 16px #0000001a;overflow:hidden;border:1px solid var(--el-border-color-lighter);height:80vh}.tools-container[data-v-67b086be]{height:0}.panel-header[data-v-67b086be]{height:50px;line-height:50px;padding:0 20px;border-bottom:1px solid var(--el-border-color-lighter);background:var(--el-bg-color)}.header-content[data-v-67b086be]{display:flex;justify-content:space-between;align-items:center}.header-title[data-v-67b086be]{font-size:16px;font-weight:700;color:var(--el-text-color-primary)}.opacity-control[data-v-67b086be]{flex:1}.header-actions[data-v-67b086be]{width:300px;display:flex;align-items:center}.panel-aside[data-v-67b086be]{border-right:1px solid var(--el-border-color-lighter);background:var(--el-bg-color-page)}.tools-menu[data-v-67b086be]{border-right:none;font-size:12px}.tools-menu .el-menu-item[data-v-67b086be]{height:40px;line-height:40px;padding:0 20px;margin:4px 8px;border-radius:4px;transition:all .3s ease}.tools-menu .el-menu-item[data-v-67b086be]:hover{background-color:var(--el-color-primary-light-9)}.tools-menu .el-menu-item.is-active[data-v-67b086be]{background-color:var(--el-color-primary);color:#fff}.panel-main[data-v-67b086be]{background:var(--el-bg-color);padding:20px}.plugin-settings[data-v-67b086be]{background-color:var(--el-bg-color-page);border-radius:4px;padding:15px;overflow-y:auto;height:100%}.theme-toggle-inner[data-v-67b086be]{font-size:18px;padding:8px;height:32px;width:32px}.panel-container[data-v-67b086be]{background:var(--el-bg-color);border-color:var(--el-border-color);display:flex;flex-direction:column}.el-menu[data-v-67b086be]{background-color:var(--bg-color);border-color:var(--border-color)}.el-menu-item[data-v-67b086be]{color:var(--text-color)}.tools-container[data-v-67b086be] .el-tab-pane{height:100%;overflow-y:auto}.tools-container[data-v-67b086be] .el-tag{white-space:normal;line-height:1.4;margin-bottom:5px}.blth_btn{background-color:#23ade5;font-size:small;margin-inline-start:5px;color:#fff;border-radius:4px;border:none;padding:5px;cursor:pointer;box-shadow:0 0 2px #00000075;line-height:10px;margin-left:15px}.blth_btn:hover{background-color:#1097cc}.blth_btn:hover:active{background-color:#0e86b6;position:relative;top:1px}.el-message,.el-overlay,.el-message-box{z-index:99002!important}.el-message-box li{list-style:initial}@media screen and (min-width: 1930px){html[lab-style*=adaptive] .base{zoom:.9375}}@media screen and (min-width: 2058px){html[lab-style*=adaptive] .base{zoom:.75}}@media screen and (min-width: 2570px){html[lab-style*=adaptive] .base{zoom:calc(2 / 3)}}@media screen and (min-width: 3210px){html[lab-style*=adaptive] .base{zoom:.5}}@media screen and (min-width: 3850px){html[lab-style*=adaptive] .base{zoom:.46875}} ");
 
 (async function (vue, pinia, _, CryptoJS, luxon, ElementPlus, ElementPlusIconsVue, vueDraggablePlus) {
   'use strict';
@@ -680,6 +680,78 @@
       });
     }
   };
+  class Cookie {
+    /**
+     * 获取所有 cookies
+     */
+    static getAll() {
+      if (document.cookie === "") return {};
+      const cookies = document.cookie.split("; ");
+      const result = {};
+      for (const cookie of cookies) {
+        const [name, value] = cookie.split("=", 2);
+        result[decodeURIComponent(name)] = decodeURIComponent(value);
+      }
+      return result;
+    }
+    /**
+     * 获取指定名称的一个或多个 cookies
+     * @param names cookie 名称或 cookie 名称数组
+     * @param defaultValue 当 cookie 不存在时使用的默认值，默认 undefined
+     */
+    static get(names, defaultValue) {
+      const cookies = this.getAll();
+      if (Array.isArray(names)) {
+        const result = {};
+        for (const name of names) {
+          result[name] = cookies[name] ? cookies[name] : defaultValue;
+        }
+        return result;
+      } else {
+        return cookies[names] ? cookies[names] : defaultValue;
+      }
+    }
+    /**
+     * 获取一组 cookies，如果有 cookie 未获取到，会反复获取直到超时为止
+     *
+     * TODO: 等 cookieStore 普及后使用监听取代轮询
+     *
+     * @param names 要获取的 cookie 名称数组
+     * @param interval 获取间隔，默认 300 毫秒
+     * @param timeout 超时时间，若留空则永不超时
+     */
+    static getAsync(names, interval = 300, timeout) {
+      return new Promise((resolve2, reject2) => {
+        let remainCookieNames = [...names];
+        const cookies = this.get(remainCookieNames);
+        remainCookieNames = remainCookieNames.filter((r) => !cookies[r]);
+        if (remainCookieNames.length === 0) {
+          resolve2(cookies);
+          return;
+        }
+        let timeoutTimer;
+        const timer = setInterval(() => {
+          Object.assign(cookies, this.get(remainCookieNames));
+          remainCookieNames = remainCookieNames.filter((r) => !cookies[r]);
+          if (remainCookieNames.length === 0) {
+            if (timeout) clearTimeout(timeoutTimer);
+            clearInterval(timer);
+            resolve2(cookies);
+          }
+        }, interval);
+        if (timeout) {
+          timeoutTimer = setTimeout(() => {
+            clearInterval(timer);
+            reject2(new Error(`获取以下 cookie 超时：${remainCookieNames}`));
+          }, timeout);
+        }
+      });
+    }
+  }
+  async function getCookies() {
+    const cookies = useBiliStore().cookies || await Cookie.getAsync(["bili_jct", "LIVE_BUVID", "buvid3"], 300, 1e4);
+    return cookies;
+  }
   const request = {
     live: new Request$1("https://api.live.bilibili.com", "https://live.bilibili.com"),
     liveTrace: new Request$1("https://live-trace.bilibili.com", "https://live.bilibili.com"),
@@ -705,7 +777,7 @@
     if (!messagePayload.bvid) {
       throw new Error("缺少必要参数：bvid");
     }
-    const bili_jct = useBiliStore().cookies.bili_jct;
+    const bili_jct = (await getCookies()).bili_jct;
     const formData = {
       oid: messagePayload.bvid,
       csrf: bili_jct,
@@ -835,8 +907,8 @@
           ts: ts()
         });
       },
-      coin2silver: (num, platform = "pc", visit_id = "") => {
-        const bili_jct = useBiliStore().cookies.bili_jct;
+      coin2silver: async (num, platform = "pc", visit_id = "") => {
+        const bili_jct = (await getCookies()).bili_jct;
         return request.live.post("/xlive/revenue/v1/wallet/coin2silver", {
           num,
           csrf: bili_jct,
@@ -845,8 +917,8 @@
           visit_id
         });
       },
-      wearMedal: (medal_id, visit_id = "") => {
-        const bili_jct = useBiliStore().cookies.bili_jct;
+      wearMedal: async (medal_id, visit_id = "") => {
+        const bili_jct = (await getCookies()).bili_jct;
         return request.live.post("/xlive/web-room/v1/fansMedal/wear", {
           medal_id,
           csrf_token: bili_jct,
@@ -856,8 +928,8 @@
       }
     },
     liveTrace: {
-      E: (id, device, ruid, is_patch = 0, heart_beat = [], visit_id = "") => {
-        const bili_jct = useBiliStore().cookies.bili_jct;
+      E: async (id, device, ruid, is_patch = 0, heart_beat = [], visit_id = "") => {
+        const bili_jct = (await getCookies()).bili_jct;
         return request.liveTrace.post("/xlive/data-interface/v1/x25Kn/E", {
           id: JSON.stringify(id),
           device: JSON.stringify(device),
@@ -872,8 +944,8 @@
           visit_id
         });
       },
-      X: (s, id, device, ruid, ets, benchmark, time, ts2, visit_id = "") => {
-        const bili_jct = useBiliStore().cookies.bili_jct;
+      X: async (s, id, device, ruid, ets, benchmark, time, ts2, visit_id = "") => {
+        const bili_jct = (await getCookies()).bili_jct;
         return request.liveTrace.post("/xlive/data-interface/v1/x25Kn/X", {
           s,
           id: JSON.stringify(id),
@@ -963,8 +1035,8 @@
           }
         );
       },
-      share: (aid, source = "pc_client_normal", eab_x = 2, ramval = 0, ga = 1, referer = "") => {
-        const bili_jct = useBiliStore().cookies.bili_jct;
+      share: async (aid, source = "pc_client_normal", eab_x = 2, ramval = 0, ga = 1, referer = "") => {
+        const bili_jct = (await getCookies()).bili_jct;
         return request.main.post("/x/web-interface/share/add", {
           eab_x,
           ramval,
@@ -975,8 +1047,8 @@
           csrf: bili_jct
         });
       },
-      coinAdd: (aid, num, select_like = 0, cross_domain = true, eab_x = 2, ramval = 6, source = "web_normal", ga = 1) => {
-        const bili_jct = useBiliStore().cookies.bili_jct;
+      coinAdd: async (aid, num, select_like = 0, cross_domain = true, eab_x = 2, ramval = 6, source = "web_normal", ga = 1) => {
+        const bili_jct = (await getCookies()).bili_jct;
         return request.main.post("/x/web-interface/coin/add ", {
           aid,
           multiply: num,
@@ -1010,8 +1082,8 @@
             }
           );
         },
-        receivePrivilege: (type, platform = "web") => {
-          const bili_jct = useBiliStore().cookies.bili_jct;
+        receivePrivilege: async (type, platform = "web") => {
+          const bili_jct = (await getCookies()).bili_jct;
           return request.main.post(
             "/x/vip/privilege/receive",
             {
@@ -1318,74 +1390,6 @@
       );
     }
   }
-  class Cookie {
-    /**
-     * 获取所有 cookies
-     */
-    static getAll() {
-      if (document.cookie === "") return {};
-      const cookies = document.cookie.split("; ");
-      const result = {};
-      for (const cookie of cookies) {
-        const [name, value] = cookie.split("=", 2);
-        result[decodeURIComponent(name)] = decodeURIComponent(value);
-      }
-      return result;
-    }
-    /**
-     * 获取指定名称的一个或多个 cookies
-     * @param names cookie 名称或 cookie 名称数组
-     * @param defaultValue 当 cookie 不存在时使用的默认值，默认 undefined
-     */
-    static get(names, defaultValue) {
-      const cookies = this.getAll();
-      if (Array.isArray(names)) {
-        const result = {};
-        for (const name of names) {
-          result[name] = cookies[name] ? cookies[name] : defaultValue;
-        }
-        return result;
-      } else {
-        return cookies[names] ? cookies[names] : defaultValue;
-      }
-    }
-    /**
-     * 获取一组 cookies，如果有 cookie 未获取到，会反复获取直到超时为止
-     *
-     * TODO: 等 cookieStore 普及后使用监听取代轮询
-     *
-     * @param names 要获取的 cookie 名称数组
-     * @param interval 获取间隔，默认 300 毫秒
-     * @param timeout 超时时间，若留空则永不超时
-     */
-    static getAsync(names, interval = 300, timeout) {
-      return new Promise((resolve2, reject2) => {
-        let remainCookieNames = [...names];
-        const cookies = this.get(remainCookieNames);
-        remainCookieNames = remainCookieNames.filter((r) => !cookies[r]);
-        if (remainCookieNames.length === 0) {
-          resolve2(cookies);
-          return;
-        }
-        let timeoutTimer;
-        const timer = setInterval(() => {
-          Object.assign(cookies, this.get(remainCookieNames));
-          remainCookieNames = remainCookieNames.filter((r) => !cookies[r]);
-          if (remainCookieNames.length === 0) {
-            if (timeout) clearTimeout(timeoutTimer);
-            clearInterval(timer);
-            resolve2(cookies);
-          }
-        }, interval);
-        if (timeout) {
-          timeoutTimer = setTimeout(() => {
-            clearInterval(timer);
-            reject2(new Error(`获取以下 cookie 超时：${remainCookieNames}`));
-          }, timeout);
-        }
-      });
-    }
-  }
   class Cookies extends BaseModule {
     /**
      * 获取 Cookies
@@ -1687,75 +1691,6 @@
     Default_FansMetals: FansMetals,
     Default_UserInfo: UserInfo
   }, Symbol.toStringTag, { value: "Module" }));
-  class SignTask extends BaseModule {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "config", this.moduleStore.moduleConfig.DailyTasks.LiveTasks.sign);
-    }
-    set status(s) {
-      this.moduleStore.moduleStatus.DailyTasks.LiveTasks.sign = s;
-    }
-    async getSignInfo() {
-      try {
-        const response = await BAPI.live.getSignInfo();
-        this.logger.log("BAPI.live.getSignInfo response", response);
-        if (response.code === 0) {
-          return response.data;
-        } else {
-          this.logger.error("获取直播签到信息失败", response.message);
-          return null;
-        }
-      } catch (error) {
-        this.logger.error("获取直播签到信息出错", error);
-        return null;
-      }
-    }
-    async sign() {
-      try {
-        const response = await BAPI.live.doSign();
-        this.logger.log(`BAPI.live.doSign response`, response);
-        if (response.code === 0) {
-          this.logger.log("直播签到成功，获得奖励:", response.data.text);
-          this.config._lastCompleteTime = tsm();
-          this.status = "done";
-          this.logger.log("直播签到任务已完成");
-        } else {
-          this.logger.error("直播签到失败", response.message);
-          this.status = "error";
-        }
-      } catch (err) {
-        this.logger.error("执行直播签到任务出错", err);
-        this.status = "error";
-      }
-    }
-    async run() {
-      this.logger.log("直播签到模块开始运行");
-      if (!isTimestampToday(this.config._lastCompleteTime)) {
-        this.status = "running";
-        const signInfo = await this.getSignInfo();
-        if (signInfo) {
-          if (signInfo.status === 0) {
-            await this.sign();
-          } else {
-            this.config._lastCompleteTime = tsm();
-            this.status = "done";
-          }
-        } else {
-          await this.sign();
-        }
-      } else {
-        if (!isNowIn(0, 0, 0, 5)) {
-          this.logger.log("今天已经完成过直播签到任务了");
-          this.status = "done";
-        } else {
-          this.logger.log("昨天的直播签到任务已经完成过了，等到今天的00:05再执行");
-        }
-      }
-      const diff = delayToNextMoment();
-      setTimeout(() => this.run(), diff.ms);
-      this.logger.log("距离直播签到模块下次运行时间:", diff.str);
-    }
-  }
   class MedalModule extends BaseModule {
     /**
      * 等待粉丝勋章数据获取完毕
@@ -2732,7 +2667,6 @@
   const otherModules = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
     __proto__: null,
     DailyTask_LiveTask_LightTask: LightTask,
-    DailyTask_LiveTask_SignTask: SignTask,
     EnhanceExperience_BanP2P: BanP2P,
     EnhanceExperience_Invisibility: Invisibility,
     EnhanceExperience_NoReport: NoReport,
@@ -2954,7 +2888,7 @@
       function handleSingleAppeal() {
         console.log("handleBatchAppeal");
         if (!form.value.bvid) {
-          ElMessage.warning("请输入bvid");
+          ElementPlus.ElMessage.warning("请输入bvid");
         }
         moduleStore.emitter.emit("Run_Auto_Appeal", {
           module: "handleSingleAppeal",
@@ -3148,7 +3082,7 @@
       };
     }
   };
-  const AlTools = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-7bf142ea"]]);
+  const AlTools = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-6d4a69e9"]]);
   const helpInfo = {
     DailyTasks: {
       MainSiteTasks: {
