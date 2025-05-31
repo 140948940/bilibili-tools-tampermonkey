@@ -8,14 +8,21 @@
 // @match        *://*.bilibili.com/*
 // @require      https://unpkg.com/vue@3.5.15/dist/vue.global.prod.js
 // @require      data:application/javascript,%3Bwindow.Vue%3DVue%3Bwindow.VueDemi%3DVue%3B
-// @require      https://cdn.jsdelivr.net/npm/element-plus@2.9.11/dist/index.full.min.js
+// @require      https://unpkg.com/element-plus@2.9.11/dist/index.full.min.js
 // @require      https://unpkg.com/@element-plus/icons-vue@2.3.1/dist/index.iife.min.js
 // @require      https://unpkg.com/pinia@3.0.2/dist/pinia.iife.prod.js
-// @require      https://unpkg.com/lodash@4.17.21/lodash.min.js
 // @require      https://unpkg.com/vue-draggable-plus@0.6.0/dist/vue-draggable-plus.iife.js
+// @require      https://unpkg.com/lodash@4.17.21/lodash.min.js
 // @require      https://unpkg.com/luxon@3.6.1/build/global/luxon.min.js
 // @require      https://unpkg.com/crypto-js@4.2.0/crypto-js.js
 // @resource     element-plus/dist/index.css  https://unpkg.com/element-plus@2.9.11/dist/index.css
+// @connect      api.bilibili.com
+// @connect      api.live.bilibili.com
+// @connect      api.vc.bilibili.com
+// @connect      passport.bilibili.com
+// @connect      live.bilibili.com
+// @connect      live-trace.bilibili.com
+// @connect      *
 // @grant        GM_addStyle
 // @grant        GM_deleteValues
 // @grant        GM_getResourceText
@@ -23,6 +30,7 @@
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
+// @run-at       document-start
 // ==/UserScript==
 
 (e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const a=document.createElement("style");a.textContent=e,document.head.append(a)})(" .el-tag[data-v-7bf142ea]{margin-right:8px;cursor:pointer}.avatar-wrap[data-v-1d0a6c1a]{width:80px;height:80px}.avatar[data-v-1d0a6c1a]{display:flex;justify-content:center;align-items:center;border-radius:50%}.radio-group[data-v-1d0a6c1a]{display:block;font-size:inherit}.info-icon[data-v-38289ed3]{font-size:var(--el-font-size-base);cursor:pointer}.status-icon[data-v-b4254e0f]{font-size:var(--el-font-size-base)}#asldd-bilibili-tools-app{--el-color-primary: #f69;--el-color-primary-light-3: #fc8bab;--el-color-primary-dark-2: #f69}.bilibili-tools-container[data-v-67b086be]{position:fixed;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.panel-toggle[data-v-67b086be]{position:fixed;top:80px;left:20px;z-index:10000;transition:all .3s ease;border-radius:8px;padding:8px 16px;box-shadow:0 2px 12px #0000001a}.panel-toggle[data-v-67b086be]:hover{transform:translateY(-2px);box-shadow:0 4px 16px #00000026}.panel-container[data-v-67b086be]{position:fixed;top:80px;left:10%;width:800px;background:var(--el-bg-color);border-radius:8px;box-shadow:0 4px 16px #0000001a;overflow:hidden;border:1px solid var(--el-border-color-lighter);height:80vh}.tools-container[data-v-67b086be]{height:0}.panel-header[data-v-67b086be]{height:50px;line-height:50px;padding:0 20px;border-bottom:1px solid var(--el-border-color-lighter);background:var(--el-bg-color)}.header-content[data-v-67b086be]{display:flex;justify-content:space-between;align-items:center}.header-title[data-v-67b086be]{font-size:16px;font-weight:700;color:var(--el-text-color-primary)}.opacity-control[data-v-67b086be]{flex:1}.header-actions[data-v-67b086be]{width:300px;display:flex;align-items:center}.panel-aside[data-v-67b086be]{border-right:1px solid var(--el-border-color-lighter);background:var(--el-bg-color-page)}.tools-menu[data-v-67b086be]{border-right:none;font-size:12px}.tools-menu .el-menu-item[data-v-67b086be]{height:40px;line-height:40px;padding:0 20px;margin:4px 8px;border-radius:4px;transition:all .3s ease}.tools-menu .el-menu-item[data-v-67b086be]:hover{background-color:var(--el-color-primary-light-9)}.tools-menu .el-menu-item.is-active[data-v-67b086be]{background-color:var(--el-color-primary);color:#fff}.panel-main[data-v-67b086be]{background:var(--el-bg-color);padding:20px}.plugin-settings[data-v-67b086be]{background-color:var(--el-bg-color-page);border-radius:4px;padding:15px;overflow-y:auto;height:100%}.theme-toggle-inner[data-v-67b086be]{font-size:18px;padding:8px;height:32px;width:32px}.panel-container[data-v-67b086be]{background:var(--el-bg-color);border-color:var(--el-border-color);display:flex;flex-direction:column}.el-menu[data-v-67b086be]{background-color:var(--bg-color);border-color:var(--border-color)}.el-menu-item[data-v-67b086be]{color:var(--text-color)}.tools-container[data-v-67b086be] .el-tab-pane{height:100%;overflow-y:auto}.tools-container[data-v-67b086be] .el-tag{white-space:normal;line-height:1.4;margin-bottom:5px}.blth_btn{background-color:#23ade5;font-size:small;margin-inline-start:5px;color:#fff;border-radius:4px;border:none;padding:5px;cursor:pointer;box-shadow:0 0 2px #00000075;line-height:10px;margin-left:15px}.blth_btn:hover{background-color:#1097cc}.blth_btn:hover:active{background-color:#0e86b6;position:relative;top:1px}.el-message,.el-overlay,.el-message-box{z-index:99002!important}.el-message-box li{list-style:initial}@media screen and (min-width: 1930px){html[lab-style*=adaptive] .base{zoom:.9375}}@media screen and (min-width: 2058px){html[lab-style*=adaptive] .base{zoom:.75}}@media screen and (min-width: 2570px){html[lab-style*=adaptive] .base{zoom:calc(2 / 3)}}@media screen and (min-width: 3210px){html[lab-style*=adaptive] .base{zoom:.5}}@media screen and (min-width: 3850px){html[lab-style*=adaptive] .base{zoom:.46875}} ");
@@ -1114,7 +1122,7 @@
       __publicField(this, "id", _BaseModule.id++);
       this.moduleName = `${moduleName} ${this.id}`;
       this.logger = new Logger(this.moduleName);
-      this.logger.log("实例化了一个模板：" + this.moduleName);
+      this.logger.log("实例化了一个模块：" + this.moduleName);
     }
     /**
      * 模块是否启用，默认通过 config.enabled 判断
@@ -1889,8 +1897,6 @@
       this.logger.log("距离点亮熄灭勋章模块下次运行时间:", diff.str);
     }
   }
-  document.querySelector.bind(document);
-  document.querySelectorAll.bind(document);
   const dce = document.createElement.bind(document);
   const urls = ["t.bilibili.com", "www.bilibili.com/video"];
   const isTargetFrame = () => urls.some((url) => _unsafeWindow.location.href.includes(url)) || document.head.innerHTML.includes("BilibiliLive");
