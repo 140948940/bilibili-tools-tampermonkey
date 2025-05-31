@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+      - package.json
+      - vite.config.ts
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Node.js version from package.json
+        id: node_version
+        run: echo "version=$(node -p "require('./package.json').volta.node")" >> $GITHUB_OUTPUT
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Get package version
+        id: package_version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Commit and push if there are changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"  # 使用 GitHub Actions 默认的机器人邮箱
+          git add -f dist/*
+          git diff --staged --quiet || git commit -m "🔧 Automated build: v${{ steps.package_version.outputs.version }}" && git push
+
+    permissions:
+      contents: write # 必须添加推送权限，允许 GitHub Actions 执行推送操作
