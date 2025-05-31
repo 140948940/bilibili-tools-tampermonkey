@@ -3,8 +3,14 @@ import { useBiliStore } from '@/stores/useBiliStore'
 import { packFormData, uuid, wbiSign } from '@/utils/index'
 import { ts, tsm } from '../utils/luxon'
 import type { MainData } from './data'
-import { de } from 'element-plus/es/locales.mjs'
-
+import Cookie from '@/utils/cookie'
+import type { BiliCookies } from '@/types'
+async function getCookies(): Promise<BiliCookies> {
+  const cookies =
+    useBiliStore().cookies ||
+    (await Cookie.getAsync(['bili_jct', 'LIVE_BUVID', 'buvid3'], 300, 10e3))
+  return cookies
+}
 const request = {
   live: new Request('https://api.live.bilibili.com', 'https://live.bilibili.com'),
   liveTrace: new Request('https://live-trace.bilibili.com', 'https://live.bilibili.com'),
@@ -52,10 +58,10 @@ export function getCurrentUserInfo(): Promise<
   return request.live.get('/xlive/web-ucenter/user/get_user_info')
 }
 /**银瓜子换硬币 */
-export function silver2coin(
+export async function silver2coin(
   visit_id = '',
 ): Promise<BiliApiResponse<{ coin: number; gold: number; silver: number; tid: string }>> {
-  const bili_jct = useBiliStore().cookies!.bili_jct
+  const bili_jct = (await getCookies()).bili_jct
   return request.live.post('/xlive/revenue/v1/wallet/silver2coin', {
     csrf: bili_jct,
     csrf_token: bili_jct,
@@ -93,7 +99,7 @@ export async function submitAppeal(messagePayload: { bvid?: string; reason: stri
     throw new Error('缺少必要参数：bvid')
   }
 
-  const bili_jct = useBiliStore().cookies!.bili_jct
+  const bili_jct = (await getCookies()).bili_jct
   const formData = {
     oid: messagePayload.bvid,
     csrf: bili_jct,
@@ -259,8 +265,8 @@ const BAPI = {
         ts: ts(),
       })
     },
-    coin2silver: (num: number, platform = 'pc', visit_id = '') => {
-      const bili_jct = useBiliStore().cookies!.bili_jct
+    coin2silver: async (num: number, platform = 'pc', visit_id = '') => {
+      const bili_jct = (await getCookies()).bili_jct
       return request.live.post('/xlive/revenue/v1/wallet/coin2silver', {
         num,
         csrf: bili_jct,
@@ -269,8 +275,8 @@ const BAPI = {
         visit_id,
       })
     },
-    wearMedal: (medal_id: number, visit_id = '') => {
-      const bili_jct = useBiliStore().cookies!.bili_jct
+    wearMedal: async (medal_id: number, visit_id = '') => {
+      const bili_jct = (await getCookies()).bili_jct
       return request.live.post('/xlive/web-room/v1/fansMedal/wear', {
         medal_id,
         csrf_token: bili_jct,
@@ -280,8 +286,15 @@ const BAPI = {
     },
   },
   liveTrace: {
-    E: (id: any[], device: any[], ruid: number, is_patch = 0, heart_beat = [], visit_id = '') => {
-      const bili_jct = useBiliStore().cookies!.bili_jct
+    E: async (
+      id: any[],
+      device: any[],
+      ruid: number,
+      is_patch = 0,
+      heart_beat = [],
+      visit_id = '',
+    ) => {
+      const bili_jct = (await getCookies()).bili_jct
       return request.liveTrace.post('/xlive/data-interface/v1/x25Kn/E', {
         id: JSON.stringify(id),
         device: JSON.stringify(device),
@@ -295,8 +308,18 @@ const BAPI = {
         visit_id,
       })
     },
-    X: (s: string, id: any[], device: any[], ruid: number, ets: number, benchmark: string, time: number, ts: number, visit_id = '') => {
-      const bili_jct = useBiliStore().cookies!.bili_jct
+    X: async (
+      s: string,
+      id: any[],
+      device: any[],
+      ruid: number,
+      ets: number,
+      benchmark: string,
+      time: number,
+      ts: number,
+      visit_id = '',
+    ) => {
+      const bili_jct = (await getCookies()).bili_jct
       return request.liveTrace.post('/xlive/data-interface/v1/x25Kn/X', {
         s,
         id: JSON.stringify(id),
@@ -416,9 +439,16 @@ const BAPI = {
         },
       )
     },
-    share: (aid: number, source = 'pc_client_normal', eab_x = 2, ramval = 0, ga = 1, referer = '') => {
+    share: async (
+      aid: number,
+      source = 'pc_client_normal',
+      eab_x = 2,
+      ramval = 0,
+      ga = 1,
+      referer = '',
+    ) => {
       // source 不能用 web 端的值，改成 pc 客户端的才能完成任务
-      const bili_jct = useBiliStore().cookies!.bili_jct
+      const bili_jct = (await getCookies()).bili_jct
       return request.main.post('/x/web-interface/share/add', {
         eab_x,
         ramval,
@@ -429,7 +459,7 @@ const BAPI = {
         csrf: bili_jct,
       })
     },
-    coinAdd: (
+    coinAdd: async (
       aid: number,
       num: number,
       select_like = 0,
@@ -439,7 +469,7 @@ const BAPI = {
       source = 'web_normal',
       ga = 1,
     ) => {
-      const bili_jct = useBiliStore().cookies!.bili_jct
+      const bili_jct = (await getCookies()).bili_jct
       return request.main.post('/x/web-interface/coin/add ', {
         aid,
         multiply: num,
@@ -473,8 +503,8 @@ const BAPI = {
           },
         )
       },
-      receivePrivilege: (type: number, platform = 'web') => {
-        const bili_jct = useBiliStore().cookies!.bili_jct
+      receivePrivilege: async (type: number, platform = 'web') => {
+        const bili_jct = (await getCookies()).bili_jct
         return request.main.post(
           '/x/vip/privilege/receive',
           {
