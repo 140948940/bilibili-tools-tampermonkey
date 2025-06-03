@@ -1619,6 +1619,7 @@
     }
     async handleAutoAppealInVideo() {
       if (this.config.currentVideoEnabled) {
+        if (isTimestampToday(this.config._lastCompleteTime)) return;
         if (_unsafeWindow.location.href.includes("www.bilibili.com/video")) {
           this.logger.log("视频自动申诉模块启动");
           const metaInfo = useMetaInfo();
