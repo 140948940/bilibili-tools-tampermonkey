@@ -6,7 +6,6 @@ import useMetaInfo from '@/stores/useMetaInfo'
 import { getValue } from '@/utils/storage'
 import { ElMessage } from 'element-plus'
 import { useCacheStore } from '@/stores/useCacheStore'
-import { useBiliStore } from '@/stores/useBiliStore'
 import { sleep } from '@/utils/index'
 import { isTimestampToday, delayToNextMoment, tsm, isNowIn } from '@/utils/luxon/index'
 import _ from 'lodash'
@@ -119,6 +118,7 @@ class AlTools extends BaseModule implements ToolsModules {
   }
   public async handleAutoAppealInVideo() {
     if (this.config.currentVideoEnabled) {
+      if (isTimestampToday(this.config._lastCompleteTime)) return
       if (unsafeWindow.location.href.includes('www.bilibili.com/video')) {
         this.logger.log('视频自动申诉模块启动')
         const metaInfo = useMetaInfo()

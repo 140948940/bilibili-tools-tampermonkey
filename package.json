@@ -1,6 +1,6 @@
 {
   "name": "bilibili-tools-tampermonkey",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "B站工具集油猴插件",
   "type": "module",
   "scripts": {
