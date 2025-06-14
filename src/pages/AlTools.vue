@@ -2,7 +2,7 @@
   <el-form :model="form" size="small" label-width="120px">
     <!-- 是否启用自动申诉 -->
     <el-form-item label="刷新后生效">
-      <el-switch v-model="moduleStore.moduleConfig.AlTools.enabled" active-text="自动申诉" />
+      <el-switch v-model="moduleStore.moduleConfig.AlTools.enabled" active-text="自动申诉" /><TaskStatus :status="moduleStore.moduleConfig.AlTools.status"></TaskStatus>
       <span>启用后每日将按照动态顺序自动申诉A-SOUL成员、李滇滇评论区(目前只针对视频)</span>
     </el-form-item>
     <el-form-item label="刷新后生效">
@@ -76,7 +76,7 @@ import { onMounted, ref, watch } from 'vue'
 import { setValue, getValue } from '@/utils/storage/index'
 import { upOptions } from '@/contanst'
 import {ElMessage} from 'element-plus'
-
+import TaskStatus from '@/components/icons/TaskStatusIcon.vue'
 const moduleStore = useModuleStore()
 const defaultAppealReasons = [
   '我的评论内容没有任何问题，是被恶意举报脚本举报导致的误删除，请求恢复我的评论。',

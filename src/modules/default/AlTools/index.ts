@@ -1,6 +1,7 @@
 import { unsafeWindow } from '$'
 import BaseModule from '../../BaseModule'
-import type { statusType, ToolsModules } from '@/modules/type'
+import type { ToolsModules } from '@/modules/type'
+import type { ModuleStatusTypes } from '@/types'
 import { getVideoInfo, submitAppeal, dynamicAll, feedType } from '@/apis/index'
 import useMetaInfo from '@/stores/useMetaInfo'
 import { getValue } from '@/utils/storage'
@@ -12,7 +13,6 @@ import _ from 'lodash'
 
 class AlTools extends BaseModule implements ToolsModules {
   static runOnMultiplePages = true
-  public status: statusType = 'notStarted'
   config = this.moduleStore.moduleConfig.AlTools
   public videoInfo: {
     bvid?: string
@@ -25,6 +25,12 @@ class AlTools extends BaseModule implements ToolsModules {
   public isAppealed = false
   public isKilling = 0
   public offset: Record<string, string> = {}
+  get status(): ModuleStatusTypes {
+    return this.config.status
+  }
+  set status(s: ModuleStatusTypes) {
+    this.config.status = s
+  }
   public async kill() {
     if (this.status != 'running') {
       return
@@ -34,7 +40,7 @@ class AlTools extends BaseModule implements ToolsModules {
       await sleep(1000)
       if (this.isKilling == 2) {
         this.isKilling = 0
-        this.status = 'notStarted'
+        this.status = ''
         this.dynamicAllParam.page = 1
         this.config._lastCompleteTime = 0
         return
@@ -91,7 +97,7 @@ class AlTools extends BaseModule implements ToolsModules {
                   )
                   if (code === 56601) {
                     this.config._lastCompleteTime = tsm()
-                    this.status = 'completed'
+                    this.status = 'done'
                     return
                   }
                   await sleep(_.random(3000, 5000))
@@ -102,16 +108,16 @@ class AlTools extends BaseModule implements ToolsModules {
             }
           }
 
-          if (this.status !== 'completed') {
+          if (this.status !== 'done') {
             return this.handleAutoAppeal()
           }
           this.config._lastCompleteTime = tsm()
-          this.status = 'completed'
+          this.status = 'done'
         } else {
           this.logger.log('不是主页面，不执行')
         }
       } catch (error) {
-        this.status = 'failed'
+        this.status = 'error'
         this.logger.error('处理自动申诉出错', error)
       }
     }

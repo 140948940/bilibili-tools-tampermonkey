@@ -1,6 +1,6 @@
 import {Store} from 'pinia'
 
-export type statusType='notStarted' | 'running' | 'completed' | 'failed'
+export type statusType='' | 'running' | 'done' | 'error'
 export interface ToolsModules{
    /**
    * 模块名称，在被导出时定义

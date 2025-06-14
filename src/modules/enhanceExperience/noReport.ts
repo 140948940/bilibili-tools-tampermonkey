@@ -49,7 +49,30 @@ class NoReport extends BaseModule {
       }
     })
   }
-
+  /**
+   * 检测当前页面是否为动态页
+   * https://t.bilibili.com/
+   */
+  private isDynamicPage() {
+    return window.location.href.includes('t.bilibili.com')
+  }
+  /**
+   * 如果是动态接口
+   * /x/polymer/web-dynamic/v1/feed/all的相应，对页面进行修改
+  */
+  // private modifyDynamicPage(response: Response) {
+  //   if (response.url.includes('/x/polymer/web-dynamic/v1/feed/all')) {
+  //     const dynItem = document.querySelectorAll('.dyn-item')
+  //     dynItem.forEach(item => {
+  //       if (!item.querySelector('.altool')) {
+  //         item.
+  //       }
+  //     })
+  //   }
+  // }
+  /**
+   * 修改页面
+   */
   /**
    * 劫持 XHR 和 fetch 请求
    */

@@ -1,5 +1,5 @@
 import { upUids } from '@/contanst'
-
+import type { ModuleStatusTypes } from '@/types'
 const defaultValues = {
   ui: {
     isCollapse: false,
@@ -144,6 +144,7 @@ const defaultValues = {
       },
     },
     AlTools: {
+      status: '' as ModuleStatusTypes,
       enabled: false,
       currentVideoEnabled: true,
       selectedMembers: [],
