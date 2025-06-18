@@ -1,5 +1,5 @@
 import { unsafeWindow } from '$'
-import BaseModule from '../../BaseModule'
+import BaseModule from '../BaseModule'
 import type { ToolsModules } from '@/modules/type'
 import type { ModuleStatusTypes } from '@/types'
 import { getVideoInfo, submitAppeal, dynamicAll, feedType } from '@/apis/index'
@@ -18,7 +18,7 @@ class AlTools extends BaseModule implements ToolsModules {
     bvid?: string
   } = {}
   public dynamicAllParam = {
-    page: 10,
+    page: 1,
     // type: 'all',
     type: 'video',
   }
@@ -49,8 +49,8 @@ class AlTools extends BaseModule implements ToolsModules {
   }
   /**批量申诉 */
   public async handleAutoAppeal(): Promise<void> {
-    if (this.dynamicAllParam.page > 20) {
-      console.log('第二十页动态')
+    if (this.dynamicAllParam.page > this.config.maxLimit) {
+      console.log('到了最大页数')
       return
     }
     if (this.isKilling === 1) {
@@ -63,17 +63,16 @@ class AlTools extends BaseModule implements ToolsModules {
       try {
         const cacheStore = useCacheStore()
         if (cacheStore.currentScriptType === 'Main') {
-          this.status = 'running'
+          // TODO：防止运行中刷新页面又重新从第一页继续，页数问题、offset问题
+          if (this.status === 'running') {
+            // this.dynamicAllParam.page = this.config.currentLimit
+          } else {
+            this.status = 'running'
+          }
           const asldd = this.config.asldd
           for (let idx = 0; idx < asldd.length; idx++) {
             const { page, type } = this.dynamicAllParam
             this.dynamicAllParam.page++
-            console.log('{ type, page, host_mid: asldd[idx] }', {
-              type,
-              page,
-              host_mid: asldd[idx],
-              offset: this.offset[asldd[idx]],
-            })
             const {
               data: { items, offset },
             } = await dynamicAll({
@@ -111,8 +110,6 @@ class AlTools extends BaseModule implements ToolsModules {
           if (this.status !== 'done') {
             return this.handleAutoAppeal()
           }
-          this.config._lastCompleteTime = tsm()
-          this.status = 'done'
         } else {
           this.logger.log('不是主页面，不执行')
         }
@@ -196,12 +193,12 @@ class AlTools extends BaseModule implements ToolsModules {
       //   biliStore.fansMedalsStatus = 'loaded'
       // }
 
-      // setTimeout(
-      //   () => this.run().catch((reason) => this.logger.error(reason)),
-      //   delayToNextMoment(0, 4).ms,
-      // )
       await this.handleAutoAppealInVideo()
       await this.handleAutoAppeal()
+      setTimeout(
+        () => this.run().catch((reason) => this.logger.error(reason)),
+        delayToNextMoment(0, 4).ms,
+      )
     } catch (error) {
       this.logger.error('提交申诉失败', error)
     }

@@ -107,7 +107,6 @@ class LightTask extends MedalModule {
 
       this.status = 'running'
       const roomidTargetidList: number[][] = this.getRoomidTargetidList()
-      console.log('roomidTargetidList', roomidTargetidList)
       if (roomidTargetidList.length > 0) {
         for (let i = 0; i < roomidTargetidList.length; i++) {
           const [roomid, target_id] = roomidTargetidList[i]
@@ -128,11 +127,13 @@ class LightTask extends MedalModule {
             await sleep(_.random(3000, 5000))
           }
         }
+        this.config._lastCompleteTime = tsm()
+        this.status = 'done'
+        this.logger.log('点亮熄灭勋章任务已完成')
+      } else {
+        this.status = ''
+        this.logger.log('暂无可点亮勋章')//牌子灰的当天可能检测不到
       }
-
-      this.config._lastCompleteTime = tsm()
-      this.status = 'done'
-      this.logger.log('点亮熄灭勋章任务已完成')
     } else {
       if (isNowIn(0, 0, 0, 5)) {
         this.logger.log('昨天的给点亮熄灭勋章任务已经完成过了，等到今天的00:05再执行')

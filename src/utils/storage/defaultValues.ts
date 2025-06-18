@@ -152,6 +152,10 @@ const defaultValues = {
       reason: '',
       asldd: [...upUids],
       _lastCompleteTime: 0,
+      /**申诉最大页数 */
+      maxLimit: 100,
+      /**当前申诉页数 */
+      currentLimit: 1,
     },
   },
   cache: {

@@ -2,3 +2,4 @@
 export * from './dailyTasks'
 export * from './enhanceExperience'
 export * from './removeElement'
+export { default as AlTools } from './AlTools/index'

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import monkey, { cdn, util } from 'vite-plugin-monkey'
 import { fileURLToPath, URL } from 'node:url'
+import packageJson from './package.json'
 export default defineConfig({
   plugins: [
     vue(),
@@ -10,8 +11,8 @@ export default defineConfig({
       userscript: {
         name: 'asldd-bilibili-tools-app',
         namespace: 'https://github.com/140948940/bilibili-tools-tampermonkey',
-        version: '1.0.0',
-        description: '个人向B站工具集油猴插件',
+        version: packageJson.version,
+        description: packageJson.description,
         author: 'A SOUL',
         match: ['*://*.bilibili.com/*'],
         license: 'MIT',
