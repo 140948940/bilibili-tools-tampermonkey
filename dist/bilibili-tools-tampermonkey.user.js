@@ -33,7 +33,7 @@
 // @run-at       document-start
 // ==/UserScript==
 
-(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const a=document.createElement("style");a.textContent=e,document.head.append(a)})(" .el-tag[data-v-6d4a69e9]{margin-right:8px;cursor:pointer}.avatar-wrap[data-v-1d0a6c1a]{width:80px;height:80px}.avatar[data-v-1d0a6c1a]{display:flex;justify-content:center;align-items:center;border-radius:50%}.radio-group[data-v-1d0a6c1a]{display:block;font-size:inherit}.info-icon[data-v-38289ed3]{font-size:var(--el-font-size-base);cursor:pointer}.status-icon[data-v-b4254e0f]{font-size:var(--el-font-size-base)}#asldd-bilibili-tools-app{--el-color-primary: #f69;--el-color-primary-light-3: #fc8bab;--el-color-primary-dark-2: #f69}.bilibili-tools-container[data-v-67b086be]{position:fixed;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.panel-toggle[data-v-67b086be]{position:fixed;top:80px;left:20px;z-index:10000;transition:all .3s ease;border-radius:8px;padding:8px 16px;box-shadow:0 2px 12px #0000001a}.panel-toggle[data-v-67b086be]:hover{transform:translateY(-2px);box-shadow:0 4px 16px #00000026}.panel-container[data-v-67b086be]{position:fixed;top:80px;left:10%;width:800px;background:var(--el-bg-color);border-radius:8px;box-shadow:0 4px 16px #0000001a;overflow:hidden;border:1px solid var(--el-border-color-lighter);height:80vh}.tools-container[data-v-67b086be]{height:0}.panel-header[data-v-67b086be]{height:50px;line-height:50px;padding:0 20px;border-bottom:1px solid var(--el-border-color-lighter);background:var(--el-bg-color)}.header-content[data-v-67b086be]{display:flex;justify-content:space-between;align-items:center}.header-title[data-v-67b086be]{font-size:16px;font-weight:700;color:var(--el-text-color-primary)}.opacity-control[data-v-67b086be]{flex:1}.header-actions[data-v-67b086be]{width:300px;display:flex;align-items:center}.panel-aside[data-v-67b086be]{border-right:1px solid var(--el-border-color-lighter);background:var(--el-bg-color-page)}.tools-menu[data-v-67b086be]{border-right:none;font-size:12px}.tools-menu .el-menu-item[data-v-67b086be]{height:40px;line-height:40px;padding:0 20px;margin:4px 8px;border-radius:4px;transition:all .3s ease}.tools-menu .el-menu-item[data-v-67b086be]:hover{background-color:var(--el-color-primary-light-9)}.tools-menu .el-menu-item.is-active[data-v-67b086be]{background-color:var(--el-color-primary);color:#fff}.panel-main[data-v-67b086be]{background:var(--el-bg-color);padding:20px}.plugin-settings[data-v-67b086be]{background-color:var(--el-bg-color-page);border-radius:4px;padding:15px;overflow-y:auto;height:100%}.theme-toggle-inner[data-v-67b086be]{font-size:18px;padding:8px;height:32px;width:32px}.panel-container[data-v-67b086be]{background:var(--el-bg-color);border-color:var(--el-border-color);display:flex;flex-direction:column}.el-menu[data-v-67b086be]{background-color:var(--bg-color);border-color:var(--border-color)}.el-menu-item[data-v-67b086be]{color:var(--text-color)}.tools-container[data-v-67b086be] .el-tab-pane{height:100%;overflow-y:auto}.tools-container[data-v-67b086be] .el-tag{white-space:normal;line-height:1.4;margin-bottom:5px}.blth_btn{background-color:#23ade5;font-size:small;margin-inline-start:5px;color:#fff;border-radius:4px;border:none;padding:5px;cursor:pointer;box-shadow:0 0 2px #00000075;line-height:10px;margin-left:15px}.blth_btn:hover{background-color:#1097cc}.blth_btn:hover:active{background-color:#0e86b6;position:relative;top:1px}.el-message,.el-overlay,.el-message-box{z-index:99002!important}.el-message-box li{list-style:initial}@media screen and (min-width: 1930px){html[lab-style*=adaptive] .base{zoom:.9375}}@media screen and (min-width: 2058px){html[lab-style*=adaptive] .base{zoom:.75}}@media screen and (min-width: 2570px){html[lab-style*=adaptive] .base{zoom:calc(2 / 3)}}@media screen and (min-width: 3210px){html[lab-style*=adaptive] .base{zoom:.5}}@media screen and (min-width: 3850px){html[lab-style*=adaptive] .base{zoom:.46875}} ");
+(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const a=document.createElement("style");a.textContent=e,document.head.append(a)})(" .status-icon[data-v-b4254e0f]{font-size:var(--el-font-size-base)}.el-tag[data-v-a9630816]{margin-right:8px;cursor:pointer}.avatar-wrap[data-v-1d0a6c1a]{width:80px;height:80px}.avatar[data-v-1d0a6c1a]{display:flex;justify-content:center;align-items:center;border-radius:50%}.radio-group[data-v-1d0a6c1a]{display:block;font-size:inherit}.info-icon[data-v-38289ed3]{font-size:var(--el-font-size-base);cursor:pointer}#asldd-bilibili-tools-app{--el-color-primary: #f69;--el-color-primary-light-3: #fc8bab;--el-color-primary-dark-2: #f69}.bilibili-tools-container[data-v-67b086be]{position:fixed;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.panel-toggle[data-v-67b086be]{position:fixed;top:80px;left:20px;z-index:10000;transition:all .3s ease;border-radius:8px;padding:8px 16px;box-shadow:0 2px 12px #0000001a}.panel-toggle[data-v-67b086be]:hover{transform:translateY(-2px);box-shadow:0 4px 16px #00000026}.panel-container[data-v-67b086be]{position:fixed;top:80px;left:10%;width:800px;background:var(--el-bg-color);border-radius:8px;box-shadow:0 4px 16px #0000001a;overflow:hidden;border:1px solid var(--el-border-color-lighter);height:80vh}.tools-container[data-v-67b086be]{height:0}.panel-header[data-v-67b086be]{height:50px;line-height:50px;padding:0 20px;border-bottom:1px solid var(--el-border-color-lighter);background:var(--el-bg-color)}.header-content[data-v-67b086be]{display:flex;justify-content:space-between;align-items:center}.header-title[data-v-67b086be]{font-size:16px;font-weight:700;color:var(--el-text-color-primary)}.opacity-control[data-v-67b086be]{flex:1}.header-actions[data-v-67b086be]{width:300px;display:flex;align-items:center}.panel-aside[data-v-67b086be]{border-right:1px solid var(--el-border-color-lighter);background:var(--el-bg-color-page)}.tools-menu[data-v-67b086be]{border-right:none;font-size:12px}.tools-menu .el-menu-item[data-v-67b086be]{height:40px;line-height:40px;padding:0 20px;margin:4px 8px;border-radius:4px;transition:all .3s ease}.tools-menu .el-menu-item[data-v-67b086be]:hover{background-color:var(--el-color-primary-light-9)}.tools-menu .el-menu-item.is-active[data-v-67b086be]{background-color:var(--el-color-primary);color:#fff}.panel-main[data-v-67b086be]{background:var(--el-bg-color);padding:20px}.plugin-settings[data-v-67b086be]{background-color:var(--el-bg-color-page);border-radius:4px;padding:15px;overflow-y:auto;height:100%}.theme-toggle-inner[data-v-67b086be]{font-size:18px;padding:8px;height:32px;width:32px}.panel-container[data-v-67b086be]{background:var(--el-bg-color);border-color:var(--el-border-color);display:flex;flex-direction:column}.el-menu[data-v-67b086be]{background-color:var(--bg-color);border-color:var(--border-color)}.el-menu-item[data-v-67b086be]{color:var(--text-color)}.tools-container[data-v-67b086be] .el-tab-pane{height:100%;overflow-y:auto}.tools-container[data-v-67b086be] .el-tag{white-space:normal;line-height:1.4;margin-bottom:5px}.blth_btn{background-color:#23ade5;font-size:small;margin-inline-start:5px;color:#fff;border-radius:4px;border:none;padding:5px;cursor:pointer;box-shadow:0 0 2px #00000075;line-height:10px;margin-left:15px}.blth_btn:hover{background-color:#1097cc}.blth_btn:hover:active{background-color:#0e86b6;position:relative;top:1px}.el-message,.el-overlay,.el-message-box{z-index:99002!important}.el-message-box li{list-style:initial}@media screen and (min-width: 1930px){html[lab-style*=adaptive] .base{zoom:.9375}}@media screen and (min-width: 2058px){html[lab-style*=adaptive] .base{zoom:.75}}@media screen and (min-width: 2570px){html[lab-style*=adaptive] .base{zoom:calc(2 / 3)}}@media screen and (min-width: 3210px){html[lab-style*=adaptive] .base{zoom:.5}}@media screen and (min-width: 3850px){html[lab-style*=adaptive] .base{zoom:.46875}} ");
 
 (async function (vue, pinia, _, CryptoJS, luxon, ElementPlus, ElementPlusIconsVue, vueDraggablePlus) {
   'use strict';
@@ -241,6 +241,7 @@
         }
       },
       AlTools: {
+        status: "",
         enabled: false,
         currentVideoEnabled: true,
         selectedMembers: [],
@@ -760,6 +761,14 @@
   };
   function getCurrentUserInfo() {
     return request.live.get("/xlive/web-ucenter/user/get_user_info");
+  }
+  async function silver2coin(visit_id = "") {
+    const bili_jct = (await getCookies()).bili_jct;
+    return request.live.post("/xlive/revenue/v1/wallet/silver2coin", {
+      csrf: bili_jct,
+      csrf_token: bili_jct,
+      visit_id
+    });
   }
   async function getVideoInfo(_data) {
     let key;
@@ -1514,7 +1523,6 @@
   let AlTools$1 = (_a = class extends BaseModule {
     constructor() {
       super(...arguments);
-      __publicField(this, "status", "notStarted");
       __publicField(this, "config", this.moduleStore.moduleConfig.AlTools);
       __publicField(this, "videoInfo", {});
       __publicField(this, "dynamicAllParam", {
@@ -1526,6 +1534,12 @@
       __publicField(this, "isKilling", 0);
       __publicField(this, "offset", {});
     }
+    get status() {
+      return this.config.status;
+    }
+    set status(s) {
+      this.config.status = s;
+    }
     async kill() {
       if (this.status != "running") {
         return;
@@ -1535,7 +1549,7 @@
         await sleep(1e3);
         if (this.isKilling == 2) {
           this.isKilling = 0;
-          this.status = "notStarted";
+          this.status = "";
           this.dynamicAllParam.page = 1;
           this.config._lastCompleteTime = 0;
           return;
@@ -1593,7 +1607,7 @@
                     );
                     if (code === 56601) {
                       this.config._lastCompleteTime = tsm();
-                      this.status = "completed";
+                      this.status = "done";
                       return;
                     }
                     await sleep(_.random(3e3, 5e3));
@@ -1603,16 +1617,16 @@
                 }
               }
             }
-            if (this.status !== "completed") {
+            if (this.status !== "done") {
               return this.handleAutoAppeal();
             }
             this.config._lastCompleteTime = tsm();
-            this.status = "completed";
+            this.status = "done";
           } else {
             this.logger.log("不是主页面，不执行");
           }
         } catch (error) {
-          this.status = "failed";
+          this.status = "error";
           this.logger.error("处理自动申诉出错", error);
         }
       }
@@ -1831,6 +1845,125 @@
       const diff = delayToNextMoment();
       setTimeout(() => this.run(), diff.ms);
       this.logger.log("距离点亮熄灭勋章模块下次运行时间:", diff.str);
+    }
+  }
+  class GroupSignTask extends BaseModule {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "config", this.moduleStore.moduleConfig.DailyTasks.OtherTasks.groupSign);
+    }
+    set status(s) {
+      this.moduleStore.moduleStatus.DailyTasks.OtherTasks.groupSign = s;
+    }
+    /**
+     * 获取应援团 id 和拥有者 uid
+     * @returns 数组，每个元素都是数组：[应援团 id，拥有者 uid]
+     */
+    async getGroupidOwneruidList() {
+      try {
+        const response = await BAPI.vc.myGroups();
+        this.logger.log(`BAPI.vc.myGroups response`, response);
+        if (response.code === 0) {
+          return response.data.list.map((item) => [item.group_id, item.owner_uid]);
+        } else {
+          this.logger.error(`获取应援团信息失败`, response.message);
+          this.status = "error";
+        }
+      } catch (error) {
+        this.logger.error(`获取应援团信息出错`, error);
+        this.status = "error";
+      }
+    }
+    async sign(group_id, owner_uid) {
+      try {
+        const response = await BAPI.vc.signIn(group_id, owner_uid);
+        this.logger.log(`BAPI.vc.signIn(${group_id}, ${owner_uid}) response`, response);
+        if (response.code === 0) {
+          this.logger.log(
+            `应援团签到 应援团ID = ${group_id} 拥有者UID = ${owner_uid} 成功, 粉丝勋章亲密度+${response.data.add_num}`
+          );
+        } else {
+          this.logger.error(
+            `应援团签到 应援团ID = ${group_id} 拥有者UID = ${owner_uid} 失败`,
+            response.message
+          );
+        }
+      } catch (error) {
+        this.logger.error(`应援团签到 应援团ID = ${group_id} 拥有者UID = ${owner_uid} 出错`, error);
+      }
+    }
+    async run() {
+      this.logger.log("应援团签到模块开始运行");
+      if (!isTimestampToday(this.config._lastCompleteTime, 8, 5)) {
+        this.status = "running";
+        const idList = await this.getGroupidOwneruidList();
+        if (idList) {
+          for (const [group_id, owner_uid] of idList) {
+            await this.sign(group_id, owner_uid);
+            await sleep(2e3);
+          }
+          this.config._lastCompleteTime = tsm();
+          this.logger.log("应援团签到任务已完成");
+          this.status = "done";
+        }
+      } else {
+        if (!isNowIn(0, 0, 8, 5)) {
+          this.logger.log("今天已经完成过应援团签到任务了");
+          this.status = "done";
+        } else {
+          this.logger.log("昨天的应援团签到任务已经完成过了，等到今天早上八点零五分再次执行");
+        }
+      }
+      const diff = delayToNextMoment(8, 5);
+      setTimeout(() => this.run(), diff.ms);
+      this.logger.log("距离应援团签到模块下次运行时间:", diff.str);
+    }
+  }
+  class SilverToCoinTask extends BaseModule {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "config", this.moduleStore.moduleConfig.DailyTasks.OtherTasks.silverToCoin);
+    }
+    set status(s) {
+      this.moduleStore.moduleStatus.DailyTasks.OtherTasks.silverToCoin = s;
+    }
+    async exchange() {
+      try {
+        const response = await silver2coin();
+        this.logger.log(`BAPI.live.silver2coin response`, response);
+        if (response.code === 0) {
+          this.logger.log(`银瓜子换硬币已完成，获得硬币:`, response.data.coin);
+          this.config._lastCompleteTime = tsm();
+          this.status = "done";
+        } else if (response.code === 403) {
+          this.logger.log("每天最多只能用银瓜子兑换1个硬币");
+          this.config._lastCompleteTime = tsm();
+          this.status = "done";
+        } else {
+          this.logger.error("银瓜子换硬币失败", response.message);
+          this.status = "error";
+        }
+      } catch (err) {
+        this.logger.error("银瓜子换硬币出错", err);
+        this.status = "error";
+      }
+    }
+    run() {
+      this.logger.log("银瓜子换硬币模块开始运行");
+      if (!isTimestampToday(this.config._lastCompleteTime)) {
+        this.status = "running";
+        this.exchange();
+      } else {
+        if (isNowIn(0, 0, 0, 5)) {
+          this.logger.log("昨天的银瓜子换硬币任务已经完成过了，等到今天的00:05再执行");
+        } else {
+          this.logger.log("今天已经完成过银瓜子换硬币任务了");
+          this.status = "done";
+        }
+      }
+      const diff = delayToNextMoment();
+      setTimeout(() => this.run(), diff.ms);
+      this.logger.log("银瓜子换硬币模块下次运行时间:", diff.str);
     }
   }
   const dce = document.createElement.bind(document);
@@ -2424,6 +2557,30 @@
       });
     }
     /**
+     * 检测当前页面是否为动态页
+     * https://t.bilibili.com/
+     */
+    isDynamicPage() {
+      return window.location.href.includes("t.bilibili.com");
+    }
+    /**
+     * 如果是动态接口
+     * /x/polymer/web-dynamic/v1/feed/all的相应，对页面进行修改
+    */
+    // private modifyDynamicPage(response: Response) {
+    //   if (response.url.includes('/x/polymer/web-dynamic/v1/feed/all')) {
+    //     const dynItem = document.querySelectorAll('.dyn-item')
+    //     dynItem.forEach(item => {
+    //       if (!item.querySelector('.altool')) {
+    //         item.
+    //       }
+    //     })
+    //   }
+    // }
+    /**
+     * 修改页面
+     */
+    /**
      * 劫持 XHR 和 fetch 请求
      */
     ajaxHook() {
@@ -2668,6 +2825,8 @@
   const otherModules = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
     __proto__: null,
     DailyTask_LiveTask_LightTask: LightTask,
+    DailyTask_OtherTask_GroupSignTask: GroupSignTask,
+    DailyTask_OtherTask_SilverToCoinTask: SilverToCoinTask,
     EnhanceExperience_BanP2P: BanP2P,
     EnhanceExperience_Invisibility: Invisibility,
     EnhanceExperience_NoReport: NoReport,
@@ -2830,6 +2989,47 @@
       loadModules
     };
   });
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+    __name: "TaskStatusIcon",
+    props: {
+      status: {}
+    },
+    setup(__props) {
+      return (_ctx, _cache) => {
+        const _component_Loading = vue.resolveComponent("Loading");
+        const _component_el_icon = vue.resolveComponent("el-icon");
+        const _component_Select = vue.resolveComponent("Select");
+        const _component_CloseBold = vue.resolveComponent("CloseBold");
+        return _ctx.status === "running" ? (vue.openBlock(), vue.createBlock(_component_el_icon, {
+          key: 0,
+          class: "status-icon is-loading"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_Loading)
+          ]),
+          _: 1
+        })) : _ctx.status === "done" ? (vue.openBlock(), vue.createBlock(_component_el_icon, {
+          key: 1,
+          class: "status-icon",
+          style: { "color": "#1ab059" }
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_Select)
+          ]),
+          _: 1
+        })) : _ctx.status === "error" ? (vue.openBlock(), vue.createBlock(_component_el_icon, {
+          key: 2,
+          class: "status-icon",
+          style: { "color": "#ff6464" }
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_CloseBold)
+          ]),
+          _: 1
+        })) : vue.createCommentVNode("", true);
+      };
+    }
+  });
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -2837,9 +3037,10 @@
     }
     return target;
   };
+  const TaskStatus = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-b4254e0f"]]);
   const _hoisted_1$3 = { style: { "display": "flex", "gap": "10px" } };
   const _hoisted_2$1 = { style: { "margin-top": "8px" } };
-  const _sfc_main$6 = {
+  const _sfc_main$5 = {
     __name: "AlTools",
     setup(__props) {
       const moduleStore = useModuleStore();
@@ -2929,6 +3130,9 @@
                   "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.unref(moduleStore).moduleConfig.AlTools.enabled = $event),
                   "active-text": "自动申诉"
                 }, null, 8, ["modelValue"]),
+                vue.createVNode(TaskStatus, {
+                  status: vue.unref(moduleStore).moduleConfig.AlTools.status
+                }, null, 8, ["status"]),
                 _cache[7] || (_cache[7] = vue.createElementVNode("span", null, "启用后每日将按照动态顺序自动申诉A-SOUL成员、李滇滇评论区(目前只针对视频)", -1))
               ]),
               _: 1,
@@ -3083,7 +3287,7 @@
       };
     }
   };
-  const AlTools = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-6d4a69e9"]]);
+  const AlTools = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-a9630816"]]);
   const helpInfo = {
     DailyTasks: {
       MainSiteTasks: {
@@ -3428,7 +3632,7 @@
     };
   });
   const _hoisted_1$2 = { class: "avatar-wrap" };
-  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
     __name: "LiveTasks",
     setup(__props) {
       const moduleStore = useModuleStore();
@@ -3934,8 +4138,8 @@
       };
     }
   });
-  const LiveTasks = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-1d0a6c1a"]]);
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+  const LiveTasks = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-1d0a6c1a"]]);
+  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
     __name: "InfoIcon",
     props: {
       item: {}
@@ -3983,49 +4187,7 @@
       };
     }
   });
-  const Info = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-38289ed3"]]);
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
-    __name: "TaskStatusIcon",
-    props: {
-      status: {}
-    },
-    setup(__props) {
-      return (_ctx, _cache) => {
-        const _component_Loading = vue.resolveComponent("Loading");
-        const _component_el_icon = vue.resolveComponent("el-icon");
-        const _component_Select = vue.resolveComponent("Select");
-        const _component_CloseBold = vue.resolveComponent("CloseBold");
-        return _ctx.status === "running" ? (vue.openBlock(), vue.createBlock(_component_el_icon, {
-          key: 0,
-          class: "status-icon is-loading"
-        }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_Loading)
-          ]),
-          _: 1
-        })) : _ctx.status === "done" ? (vue.openBlock(), vue.createBlock(_component_el_icon, {
-          key: 1,
-          class: "status-icon",
-          style: { "color": "#1ab059" }
-        }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_Select)
-          ]),
-          _: 1
-        })) : _ctx.status === "error" ? (vue.openBlock(), vue.createBlock(_component_el_icon, {
-          key: 2,
-          class: "status-icon",
-          style: { "color": "#ff6464" }
-        }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_CloseBold)
-          ]),
-          _: 1
-        })) : vue.createCommentVNode("", true);
-      };
-    }
-  });
-  const TaskStatus = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-b4254e0f"]]);
+  const Info = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-38289ed3"]]);
   const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
     __name: "OtherTasks",
     setup(__props) {
