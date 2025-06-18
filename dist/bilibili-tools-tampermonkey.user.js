@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         asldd-bilibili-tools-app
 // @namespace    https://github.com/140948940/bilibili-tools-tampermonkey
-// @version      1.0.0
+// @version      1.0.5
 // @author       A SOUL
 // @description  个人向B站工具集油猴插件
 // @license      MIT
@@ -248,7 +248,11 @@
         selectedContentTypes: ["视频"],
         reason: "",
         asldd: [...upUids],
-        _lastCompleteTime: 0
+        _lastCompleteTime: 0,
+        /**申诉最大页数 */
+        maxLimit: 100,
+        /**当前申诉页数 */
+        currentLimit: 1
       }
     },
     cache: {
@@ -1454,252 +1458,8 @@
     }
   }
   __publicField(BilibiliLive, "runOnMultiplePages", true);
-  async function getMetaInfo() {
-    try {
-      const url = window.location.href;
-      const videoInfo = parseVideoId(url);
-      const roomIdMatch = url.match(/(?:live\.bilibili\.com\/)(\d+)/);
-      const roomId = roomIdMatch ? parseInt(roomIdMatch[1], 10) : null;
-      const { data: userInfo } = await getCurrentUserInfo();
-      return {
-        videoInfo,
-        roomId,
-        userInfo
-      };
-    } catch (error) {
-      console.error("getMetaInfo", error);
-      return {
-        videoInfo: null,
-        roomId: null,
-        userInfo: null
-      };
-    }
-  }
-  const useMetaInfo = pinia.defineStore("metaInfo", () => {
-    const metaInfo = vue.ref({
-      videoInfo: null,
-      roomId: null,
-      userInfo: null
-    });
-    const setMetaInfo = async () => {
-      metaInfo.value = await getMetaInfo();
-    };
-    return {
-      metaInfo,
-      setMetaInfo
-    };
-  });
-  const useCacheStore = pinia.defineStore("cache", () => {
-    const cache = vue.reactive(Storage.getCache());
-    const currentScriptType = vue.ref("Main");
-    function startMainBLTHAliveHeartBeat() {
-      cache.lastAliveHeartBeatTime = Date.now();
-      const timer = setInterval(() => cache.lastAliveHeartBeatTime = Date.now(), 5e3);
-      window.addEventListener("unload", () => {
-        clearInterval(timer);
-        cache.lastAliveHeartBeatTime = 0;
-      });
-    }
-    function checkCurrentScriptType() {
-      if (cache.lastAliveHeartBeatTime !== 0 && Date.now() - cache.lastAliveHeartBeatTime < 8e3) {
-        if (sessionStorage.getItem("main_blth_flag") === null) {
-          currentScriptType.value = "Other";
-        } else {
-          currentScriptType.value = "SubMain";
-        }
-      } else {
-        currentScriptType.value = "Main";
-        sessionStorage.setItem("main_blth_flag", "🚩");
-      }
-    }
-    vue.watch(cache, (newCache) => Storage.setCache(newCache));
-    return {
-      cache,
-      currentScriptType,
-      startMainBLTHAliveHeartBeat,
-      checkCurrentScriptType
-    };
-  });
-  let AlTools$1 = (_a = class extends BaseModule {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "config", this.moduleStore.moduleConfig.AlTools);
-      __publicField(this, "videoInfo", {});
-      __publicField(this, "dynamicAllParam", {
-        page: 10,
-        // type: 'all',
-        type: "video"
-      });
-      __publicField(this, "isAppealed", false);
-      __publicField(this, "isKilling", 0);
-      __publicField(this, "offset", {});
-    }
-    get status() {
-      return this.config.status;
-    }
-    set status(s) {
-      this.config.status = s;
-    }
-    async kill() {
-      if (this.status != "running") {
-        return;
-      }
-      this.isKilling = 1;
-      while (true) {
-        await sleep(1e3);
-        if (this.isKilling == 2) {
-          this.isKilling = 0;
-          this.status = "";
-          this.dynamicAllParam.page = 1;
-          this.config._lastCompleteTime = 0;
-          return;
-        }
-      }
-    }
-    /**批量申诉 */
-    async handleAutoAppeal() {
-      if (this.dynamicAllParam.page > 20) {
-        console.log("第二十页动态");
-        return;
-      }
-      if (this.isKilling === 1) {
-        this.isKilling = 2;
-        return;
-      }
-      if (isTimestampToday(this.config._lastCompleteTime)) {
-        this.logger.log("今天已经批量申诉过了");
-      } else {
-        try {
-          const cacheStore = useCacheStore();
-          if (cacheStore.currentScriptType === "Main") {
-            this.status = "running";
-            const asldd = this.config.asldd;
-            for (let idx = 0; idx < asldd.length; idx++) {
-              const { page, type } = this.dynamicAllParam;
-              this.dynamicAllParam.page++;
-              console.log("{ type, page, host_mid: asldd[idx] }", {
-                type,
-                page,
-                host_mid: asldd[idx],
-                offset: this.offset[asldd[idx]]
-              });
-              const {
-                data: { items, offset }
-              } = await dynamicAll({
-                type,
-                page,
-                host_mid: asldd[idx],
-                offset: this.offset[asldd[idx]] || 0
-              });
-              this.offset[asldd[idx]] = offset;
-              const appealList = items.filter((item) => {
-                var _a2, _b;
-                const uid = Number((_b = (_a2 = item == null ? void 0 : item.modules) == null ? void 0 : _a2.module_author) == null ? void 0 : _b.mid);
-                return this.config.asldd.includes(uid);
-              });
-              console.log("appealList", appealList);
-              for (let i = 0; i < appealList.length; i++) {
-                try {
-                  const item = appealList[i];
-                  if (item.type === feedType.DYNAMIC_TYPE_AV) {
-                    const { code } = await this.handleSubmitAppeal(
-                      item.modules.module_dynamic.major.archive.bvid
-                    );
-                    if (code === 56601) {
-                      this.config._lastCompleteTime = tsm();
-                      this.status = "done";
-                      return;
-                    }
-                    await sleep(_.random(3e3, 5e3));
-                  }
-                } catch (error) {
-                  this.logger.error("批量申诉出错", error);
-                }
-              }
-            }
-            if (this.status !== "done") {
-              return this.handleAutoAppeal();
-            }
-            this.config._lastCompleteTime = tsm();
-            this.status = "done";
-          } else {
-            this.logger.log("不是主页面，不执行");
-          }
-        } catch (error) {
-          this.status = "error";
-          this.logger.error("处理自动申诉出错", error);
-        }
-      }
-    }
-    async handleAutoAppealInVideo() {
-      if (this.config.currentVideoEnabled) {
-        if (isTimestampToday(this.config._lastCompleteTime)) return;
-        if (_unsafeWindow.location.href.includes("www.bilibili.com/video")) {
-          this.logger.log("视频自动申诉模块启动");
-          const metaInfo = useMetaInfo();
-          if (!this.videoInfo.bvid) {
-            if (!metaInfo.metaInfo.videoInfo) {
-              await metaInfo.setMetaInfo();
-            }
-            if (metaInfo.metaInfo.videoInfo) {
-              const { data: videoInfo } = await getVideoInfo(metaInfo.metaInfo.videoInfo);
-              this.videoInfo = videoInfo;
-            } else {
-              throw new Error("未获取到视频信息");
-            }
-          }
-          if (this.videoInfo.bvid) {
-            return this.handleSubmitAppeal(this.videoInfo.bvid);
-          }
-        }
-      } else {
-        console.warn("不是视频页面");
-      }
-    }
-    async handleSubmitAppeal(bvid, reason = "") {
-      console.log("handleSubmitAppeal", bvid);
-      try {
-        if (!bvid) {
-          throw new Error("bvid为空");
-        }
-        const appealReasons = getValue("appealReasons", []);
-        const res = await submitAppeal({
-          bvid,
-          reason: this.config.reason && this.config.reason.length > 15 || appealReasons[Math.floor(Math.random() * appealReasons.length)]
-        });
-        if (res.code === 0) {
-          ElementPlus.ElMessage.success(`申诉结果：${res.data.success_toast}`);
-        } else {
-          ElementPlus.ElMessage.error(`${res.message}, bvid:${bvid} `);
-        }
-        return res;
-      } catch (error) {
-        this.logger.error("提交申诉失败", error);
-      }
-    }
-    async run() {
-      try {
-        const emitter = this.moduleStore.emitter;
-        emitter.off("Run_Auto_Appeal");
-        emitter.on("Run_Auto_Appeal", async (data) => {
-          if (data.module === "handleBatchAppeal") {
-            await this.kill();
-            this.handleAutoAppeal();
-          } else if (data.module === "handleSingleAppeal") {
-            const { bvid, reason } = data.params || {};
-            await this.handleSubmitAppeal(bvid, reason);
-          }
-        });
-        await this.handleAutoAppealInVideo();
-        await this.handleAutoAppeal();
-      } catch (error) {
-        this.logger.error("提交申诉失败", error);
-      }
-    }
-  }, __publicField(_a, "runOnMultiplePages", true), _a);
   const defaultModules = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
     __proto__: null,
-    AlTools: AlTools$1,
     Default_BilibiliLive: BilibiliLive,
     Default_Cookies: Cookies,
     Default_DailyRewardInfo: DailyRewardInfo,
@@ -1820,7 +1580,6 @@
         }
         this.status = "running";
         const roomidTargetidList = this.getRoomidTargetidList();
-        console.log("roomidTargetidList", roomidTargetidList);
         if (roomidTargetidList.length > 0) {
           for (let i = 0; i < roomidTargetidList.length; i++) {
             const [roomid, target_id] = roomidTargetidList[i];
@@ -1830,10 +1589,13 @@
               await sleep(_.random(3e3, 5e3));
             }
           }
+          this.config._lastCompleteTime = tsm();
+          this.status = "done";
+          this.logger.log("点亮熄灭勋章任务已完成");
+        } else {
+          this.status = "";
+          this.logger.log("暂无可点亮勋章");
         }
-        this.config._lastCompleteTime = tsm();
-        this.status = "done";
-        this.logger.log("点亮熄灭勋章任务已完成");
       } else {
         if (isNowIn(0, 0, 0, 5)) {
           this.logger.log("昨天的给点亮熄灭勋章任务已经完成过了，等到今天的00:05再执行");
@@ -2822,8 +2584,251 @@
     }
   }
   __publicField(RemoveLiveMosaic, "runOnMultiplePages", true);
+  async function getMetaInfo() {
+    try {
+      const url = window.location.href;
+      const videoInfo = parseVideoId(url);
+      const roomIdMatch = url.match(/(?:live\.bilibili\.com\/)(\d+)/);
+      const roomId = roomIdMatch ? parseInt(roomIdMatch[1], 10) : null;
+      const { data: userInfo } = await getCurrentUserInfo();
+      return {
+        videoInfo,
+        roomId,
+        userInfo
+      };
+    } catch (error) {
+      console.error("getMetaInfo", error);
+      return {
+        videoInfo: null,
+        roomId: null,
+        userInfo: null
+      };
+    }
+  }
+  const useMetaInfo = pinia.defineStore("metaInfo", () => {
+    const metaInfo = vue.ref({
+      videoInfo: null,
+      roomId: null,
+      userInfo: null
+    });
+    const setMetaInfo = async () => {
+      metaInfo.value = await getMetaInfo();
+    };
+    return {
+      metaInfo,
+      setMetaInfo
+    };
+  });
+  const useCacheStore = pinia.defineStore("cache", () => {
+    const cache = vue.reactive(Storage.getCache());
+    const currentScriptType = vue.ref("Main");
+    function startMainBLTHAliveHeartBeat() {
+      cache.lastAliveHeartBeatTime = Date.now();
+      const timer = setInterval(() => cache.lastAliveHeartBeatTime = Date.now(), 5e3);
+      window.addEventListener("unload", () => {
+        clearInterval(timer);
+        cache.lastAliveHeartBeatTime = 0;
+      });
+    }
+    function checkCurrentScriptType() {
+      if (cache.lastAliveHeartBeatTime !== 0 && Date.now() - cache.lastAliveHeartBeatTime < 8e3) {
+        if (sessionStorage.getItem("main_blth_flag") === null) {
+          currentScriptType.value = "Other";
+        } else {
+          currentScriptType.value = "SubMain";
+        }
+      } else {
+        currentScriptType.value = "Main";
+        sessionStorage.setItem("main_blth_flag", "🚩");
+      }
+    }
+    vue.watch(cache, (newCache) => Storage.setCache(newCache));
+    return {
+      cache,
+      currentScriptType,
+      startMainBLTHAliveHeartBeat,
+      checkCurrentScriptType
+    };
+  });
+  let AlTools$1 = (_a = class extends BaseModule {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "config", this.moduleStore.moduleConfig.AlTools);
+      __publicField(this, "videoInfo", {});
+      __publicField(this, "dynamicAllParam", {
+        page: 1,
+        // type: 'all',
+        type: "video"
+      });
+      __publicField(this, "isAppealed", false);
+      __publicField(this, "isKilling", 0);
+      __publicField(this, "offset", {});
+    }
+    get status() {
+      return this.config.status;
+    }
+    set status(s) {
+      this.config.status = s;
+    }
+    async kill() {
+      if (this.status != "running") {
+        return;
+      }
+      this.isKilling = 1;
+      while (true) {
+        await sleep(1e3);
+        if (this.isKilling == 2) {
+          this.isKilling = 0;
+          this.status = "";
+          this.dynamicAllParam.page = 1;
+          this.config._lastCompleteTime = 0;
+          return;
+        }
+      }
+    }
+    /**批量申诉 */
+    async handleAutoAppeal() {
+      if (this.dynamicAllParam.page > this.config.maxLimit) {
+        console.log("到了最大页数");
+        return;
+      }
+      if (this.isKilling === 1) {
+        this.isKilling = 2;
+        return;
+      }
+      if (isTimestampToday(this.config._lastCompleteTime)) {
+        this.logger.log("今天已经批量申诉过了");
+      } else {
+        try {
+          const cacheStore = useCacheStore();
+          if (cacheStore.currentScriptType === "Main") {
+            if (this.status === "running") {
+            } else {
+              this.status = "running";
+            }
+            const asldd = this.config.asldd;
+            for (let idx = 0; idx < asldd.length; idx++) {
+              const { page, type } = this.dynamicAllParam;
+              this.dynamicAllParam.page++;
+              const {
+                data: { items, offset }
+              } = await dynamicAll({
+                type,
+                page,
+                host_mid: asldd[idx],
+                offset: this.offset[asldd[idx]] || 0
+              });
+              this.offset[asldd[idx]] = offset;
+              const appealList = items.filter((item) => {
+                var _a2, _b;
+                const uid = Number((_b = (_a2 = item == null ? void 0 : item.modules) == null ? void 0 : _a2.module_author) == null ? void 0 : _b.mid);
+                return this.config.asldd.includes(uid);
+              });
+              console.log("appealList", appealList);
+              for (let i = 0; i < appealList.length; i++) {
+                try {
+                  const item = appealList[i];
+                  if (item.type === feedType.DYNAMIC_TYPE_AV) {
+                    const { code } = await this.handleSubmitAppeal(
+                      item.modules.module_dynamic.major.archive.bvid
+                    );
+                    if (code === 56601) {
+                      this.config._lastCompleteTime = tsm();
+                      this.status = "done";
+                      return;
+                    }
+                    await sleep(_.random(3e3, 5e3));
+                  }
+                } catch (error) {
+                  this.logger.error("批量申诉出错", error);
+                }
+              }
+            }
+            if (this.status !== "done") {
+              return this.handleAutoAppeal();
+            }
+          } else {
+            this.logger.log("不是主页面，不执行");
+          }
+        } catch (error) {
+          this.status = "error";
+          this.logger.error("处理自动申诉出错", error);
+        }
+      }
+    }
+    async handleAutoAppealInVideo() {
+      if (this.config.currentVideoEnabled) {
+        if (isTimestampToday(this.config._lastCompleteTime)) return;
+        if (_unsafeWindow.location.href.includes("www.bilibili.com/video")) {
+          this.logger.log("视频自动申诉模块启动");
+          const metaInfo = useMetaInfo();
+          if (!this.videoInfo.bvid) {
+            if (!metaInfo.metaInfo.videoInfo) {
+              await metaInfo.setMetaInfo();
+            }
+            if (metaInfo.metaInfo.videoInfo) {
+              const { data: videoInfo } = await getVideoInfo(metaInfo.metaInfo.videoInfo);
+              this.videoInfo = videoInfo;
+            } else {
+              throw new Error("未获取到视频信息");
+            }
+          }
+          if (this.videoInfo.bvid) {
+            return this.handleSubmitAppeal(this.videoInfo.bvid);
+          }
+        }
+      } else {
+        console.warn("不是视频页面");
+      }
+    }
+    async handleSubmitAppeal(bvid, reason = "") {
+      console.log("handleSubmitAppeal", bvid);
+      try {
+        if (!bvid) {
+          throw new Error("bvid为空");
+        }
+        const appealReasons = getValue("appealReasons", []);
+        const res = await submitAppeal({
+          bvid,
+          reason: this.config.reason && this.config.reason.length > 15 || appealReasons[Math.floor(Math.random() * appealReasons.length)]
+        });
+        if (res.code === 0) {
+          ElementPlus.ElMessage.success(`申诉结果：${res.data.success_toast}`);
+        } else {
+          ElementPlus.ElMessage.error(`${res.message}, bvid:${bvid} `);
+        }
+        return res;
+      } catch (error) {
+        this.logger.error("提交申诉失败", error);
+      }
+    }
+    async run() {
+      try {
+        const emitter = this.moduleStore.emitter;
+        emitter.off("Run_Auto_Appeal");
+        emitter.on("Run_Auto_Appeal", async (data) => {
+          if (data.module === "handleBatchAppeal") {
+            await this.kill();
+            this.handleAutoAppeal();
+          } else if (data.module === "handleSingleAppeal") {
+            const { bvid, reason } = data.params || {};
+            await this.handleSubmitAppeal(bvid, reason);
+          }
+        });
+        await this.handleAutoAppealInVideo();
+        await this.handleAutoAppeal();
+        setTimeout(
+          () => this.run().catch((reason) => this.logger.error(reason)),
+          delayToNextMoment(0, 4).ms
+        );
+      } catch (error) {
+        this.logger.error("提交申诉失败", error);
+      }
+    }
+  }, __publicField(_a, "runOnMultiplePages", true), _a);
   const otherModules = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
     __proto__: null,
+    AlTools: AlTools$1,
     DailyTask_LiveTask_LightTask: LightTask,
     DailyTask_OtherTask_GroupSignTask: GroupSignTask,
     DailyTask_OtherTask_SilverToCoinTask: SilverToCoinTask,
